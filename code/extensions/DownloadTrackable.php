@@ -15,6 +15,7 @@ class DownloadTrackable extends DataObjectDecorator {
 			$downloadsTab = $fields->findOrMakeTab('BottomRoot.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'));
 
 			$showfields = array(
+				'Filename' => 'Filename',
 				'Created' => 'Downloaded',
 				'By' => 'By',
 			);
