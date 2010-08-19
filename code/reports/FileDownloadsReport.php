@@ -25,10 +25,11 @@ class FileDownloadsReport extends SS_Report {
 				'formatting' => '".$Downloader()."',
 			),
 			'Referer' => 'Referrer',
+			'UserAgent' => 'UserAgent',
 			'UserIP' => 'IP Address',
 		);
 	}
-	
+
 	/**
 	 * Return the {@link SQLQuery} that provides your report data.
 	 */

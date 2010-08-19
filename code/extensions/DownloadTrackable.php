@@ -33,4 +33,14 @@ class DownloadTrackable extends DataObjectDecorator {
 			$fields->addFieldToTab('BottomRoot.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'), $tableField);
 		}
 	}
+
+	public function onAccessGranted() {
+		$downloadRecord = new FileDownloadRecord();
+		// store the full filename for now
+		$url = array_key_exists('url', $_GET) ? $_GET['url'] : $_SERVER['REQUEST_URI'];
+		$file_path = Director::makeRelative($url);
+		$downloadRecord->Filename = $file_path ? $file_path : $this->owner->getFilename();
+		$downloadRecord->FileID = $this->owner->ID;
+		$downloadRecord->write();
+	}
 }

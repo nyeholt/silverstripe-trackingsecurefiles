@@ -7,7 +7,3 @@ Director::addRules(60, array(ASSETS_DIR . '/$Action' => 'TrackingSecureFileContr
 */
 DataObject::add_extension('File', 'DownloadTrackable');
 SS_Report::register('ReportAdmin', 'FileDownloadsReport');
-
-Director::addRules(60, array(
-	ASSETS_DIR . '/$Action' => 'TrackingSecureFileController'
-));
