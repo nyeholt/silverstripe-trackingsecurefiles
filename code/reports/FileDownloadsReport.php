@@ -20,9 +20,11 @@ class FileDownloadsReport extends SS_Report {
 		return array(
 			"Filename" => 'Filename',
 			'Created' => 'Time',
+			'UserID' => 'User',
 			'By' => array(
 				'title' => 'By',
 				'formatting' => '".$Downloader()."',
+				'csvFormatting' => '".$Downloader()."',
 			),
 			'Referer' => 'Referrer',
 			'UserAgent' => 'UserAgent',
