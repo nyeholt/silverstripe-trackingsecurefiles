@@ -9,8 +9,10 @@ All code covered by the BSD license located at http://silverstripe.org/bsd-licen
  *
  * @author marcus@silverstripe.com.au
  */
-class DownloadTrackable extends DataObjectDecorator {
-    public function updateCMSFields($fields) {
+class DownloadTrackable extends DataExtension{
+
+    public function updateCMSFields(FieldList $fields) {
+    	
 		if ($this->owner->ClassName == 'File' || $this->owner->ClassName == 'Image') {
 			$downloadsTab = $fields->findOrMakeTab('BottomRoot.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'));
 

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Content side-report listing pages with broken links
- * @package cms
- * @subpackage content
+ * Content secure files download listing
+ * @package trackingsecurefiles
+ * @subpackage reports
  */
 
 class FileDownloadsReport extends SS_Report {
@@ -33,12 +33,9 @@ class FileDownloadsReport extends SS_Report {
 	}
 
 	/**
-	 * Return the {@link SQLQuery} that provides your report data.
+	 * Return the records that provides your report data.
 	 */
-	function sourceQuery($params) {
-		$dummy = new FileDownloadRecord();
-		$query = $dummy->buildSQL();
-		$query->orderby('Created DESC');
-		return $query;
+	public function sourceRecords($params = null) {
+		return FileDownloadRecord::get()->sort('Created', 'DESC');
 	}
 }

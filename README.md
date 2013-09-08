@@ -9,7 +9,7 @@ Marcus Nyeholt
 
 Requirements
 ------------
-SilverStripe 2.4.x
+SilverStripe 3.0.x
 securefiles module from http://polemic.net.nz/svn/silverstripe/modules/SecureFiles/trunk/
 
 
