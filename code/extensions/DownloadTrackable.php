@@ -9,10 +9,12 @@ All code covered by the BSD license located at http://silverstripe.org/bsd-licen
  *
  * @author marcus@silverstripe.com.au
  */
-class DownloadTrackable extends DataObjectDecorator {
-    public function updateCMSFields($fields) {
+class DownloadTrackable extends DataExtension{
+
+    public function updateCMSFields(FieldList $fields) {
+
 		if ($this->owner->ClassName == 'File' || $this->owner->ClassName == 'Image') {
-			$downloadsTab = $fields->findOrMakeTab('BottomRoot.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'));
+			$downloadsTab = $fields->findOrMakeTab('Root.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'));
 
 			$showfields = array(
 				'Filename' => 'Filename',
@@ -39,8 +41,8 @@ class DownloadTrackable extends DataObjectDecorator {
 
 			$tf = new TextField('DownloadTotal', _t('DownloadTrackable.TOTAL', 'Total'), $total);
 			$tf = $tf->performReadonlyTransformation();
-			$fields->addFieldToTab('BottomRoot.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'), $tf);
-			$fields->addFieldToTab('BottomRoot.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'), $tableField);
+			$fields->addFieldToTab('Root.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'), $tf);
+			$fields->addFieldToTab('Root.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'), $tableField);
 		}
 	}
 
