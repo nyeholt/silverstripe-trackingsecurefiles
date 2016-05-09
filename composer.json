@@ -1,0 +1,19 @@
+{
+	"name": "silverstripe-australia/silverstripe-trackingsecurefiles",
+	"description": "The Tracking Secure Files module adds the ability to record the download of a secure file.",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "secureassets", "tracking"],
+	"license": "BSD-3-Clause",
+	"authors": [
+	{
+		"name": "Marcus Nyeholt",
+		"email": "marcus@silverstripe.com.au"
+	}
+	],
+	"extra": {
+		"installer-name": "trackingsecurefiles",
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
+}

@@ -27,10 +27,3 @@ Quick Usage Overview
 
 Extract to the "trackingsecurefiles" directory. It is already configured to
 override the default behaviour of the secure files module. 
-
-
-Troubleshooting
----------------
-
-The base securefiles module does throw a few PHP Notice errors - check
-these if you're having trouble downloading files. 

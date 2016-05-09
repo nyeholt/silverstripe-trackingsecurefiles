@@ -11,14 +11,14 @@ All code covered by the BSD license located at http://silverstripe.org/bsd-licen
  * @author marcus@silverstripe.com.au
  */
 class FileDownloadRecord extends DataObject {
-    public static $db = array(
+    private static $db = array(
 		'Filename' => 'Varchar(255)',
 		'UserIP' => 'Varchar(32)',
 		'Referer' => 'Varchar(255)',
 		'UserAgent' => 'Varchar(255)',
 	);
 
-	public static $has_one = array(
+	private static $has_one = array(
 		'User' => 'Member',
 		'File' => 'File',
 		'Page' => 'SiteTree',
@@ -40,7 +40,7 @@ class FileDownloadRecord extends DataObject {
 		}
 	}
 
-	public function Downloader() {
+	public function getDownloader() {
 		$downloader = $this->User();
 		if ($downloader) {
 			return $downloader->getName();

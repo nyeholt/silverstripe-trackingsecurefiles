@@ -1,66 +1,34 @@
 <?php
-/* 
- * 
-All code covered by the BSD license located at http://silverstripe.org/bsd-license/
- */
-
 /**
- * Description
- *
  * @author marcus@silverstripe.com.au
  */
-class DownloadTrackable extends DataExtension{
+class DownloadTrackable extends DataExtension {
 
     public function updateCMSFields(FieldList $fields) {
 
-		if ($this->owner->ClassName == 'File' || $this->owner->ClassName == 'Image') {
-			$downloadsTab = $fields->findOrMakeTab('Root.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'));
-
+		if (!($this->owner instanceof Folder)) {
 			$showfields = array(
 				'Filename' => 'Filename',
-				'Created' => 'Downloaded',
-				'By' => 'By',
+				'Created' => 'At time',
+				'Downloader' => 'Downloader',
 			);
+            
+            $records = FileDownloadRecord::get()->filter(array(
+                'FileID'    => $this->owner->ID
+            ));
+            
+            $config = GridFieldConfig_RecordViewer::create();
+            $colums = $config->getComponentByType('GridFieldDataColumns')->setDisplayFields($showfields);
+            
+            $grid = GridField::create('Downloads', 'Recorded downloads', $records, $config);
 
-			$tableField = new TableListField(
-				'Downloads', 'FileDownloadRecord',
-				$showfields, '"FileID"=' . (int) $this->owner->ID,
-				'Created DESC'
-			);
-
-			$tableField->setFieldFormatting(array(
-				'By' => '".$Downloader()."'
-			));
-
-			$total = DB::query(sprintf(
-				"SELECT COUNT(*) FROM \"%s\" WHERE \"%s\" = %d",
-				'FileDownloadRecord',
-				'FileID',
-				(int) $this->owner->ID
-			))->value();
-
-			$tf = new TextField('DownloadTotal', _t('DownloadTrackable.TOTAL', 'Total'), $total);
+            $total = $records->count();
+            
+			$tf = TextField::create('DownloadTotal', _t('DownloadTrackable.TOTAL', 'Total'), $total);
 			$tf = $tf->performReadonlyTransformation();
 			$fields->addFieldToTab('Root.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'), $tf);
-			$fields->addFieldToTab('Root.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'), $tableField);
+			$fields->addFieldToTab('Root.'._t('DownloadTrackable.DOWNLOADTRACKINGTAB', 'Downloads'), $grid);
 		}
 	}
 
-	public function onAccessGranted() {
-		// check to make sure this is the actual file and not just a rendition... if that matters?
-		$o = $this->owner;
-		
-		$downloadRecord = new FileDownloadRecord();
-		// store the full filename for now
-		$url = array_key_exists('url', $_GET) ? $_GET['url'] : $_SERVER['REQUEST_URI'];
-		// check if it's a resampled file
-		if (strpos($url, '_resampled/AssetLibraryPreview')) {
-			// ignore it
-			return;
-		}
-		$file_path = Director::makeRelative($url);
-		$downloadRecord->Filename = $file_path ? $file_path : $this->owner->getFilename();
-		$downloadRecord->FileID = $this->owner->ID;
-		$downloadRecord->write();
-	}
 }

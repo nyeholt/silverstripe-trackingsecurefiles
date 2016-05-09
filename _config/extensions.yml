@@ -4,3 +4,6 @@ Name: trackingsecurefiles-extensions
 File:
   extensions:
     ['DownloadTrackable']
+SecureFileController:
+  extensions:
+    - SecureTrackingController
