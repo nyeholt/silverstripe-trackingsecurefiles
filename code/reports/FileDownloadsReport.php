@@ -18,17 +18,17 @@ class FileDownloadsReport extends SS_Report {
 
 	function columns() {
 		return array(
-			"Filename" => 'Filename',
-			'Created' => 'Time',
-			'UserID' => 'User',
+			"Filename" => array('title' => 'Filename'),
+			'Created' => array('title' => 'Time'),
+			'UserID' => array('title' => 'User'),
 			'By' => array(
 				'title' => 'By',
-				'formatting' => '".$Downloader()."',
-				'csvFormatting' => '".$Downloader()."',
+				'formatting' => '".$getDownloader()."',
+				'csvFormatting' => '".$getDownloader()."',
 			),
-			'Referer' => 'Referrer',
-			'UserAgent' => 'UserAgent',
-			'UserIP' => 'IP Address',
+			'Referer' => array('title' => 'Referrer'),
+			'UserAgent' => array('title' => 'UserAgent'),
+			'UserIP' => array('title' => 'IP Address'),
 		);
 	}
 
