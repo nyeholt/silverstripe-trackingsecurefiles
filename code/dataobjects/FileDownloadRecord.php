@@ -23,6 +23,10 @@ class FileDownloadRecord extends DataObject {
 		'File' => 'File',
 		'Page' => 'SiteTree',
 	);
+    
+    private static $summary_fields = array(
+        'Created', 'Filename', 'UserAgent',
+    );
 
 	protected function onBeforeWrite() {
 		parent::onBeforeWrite();
